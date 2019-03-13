@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>WebView</title>
+		<style type="text/css">
+			body{
+				background: #cbcc1a;
+			}
+			.btn{
+				line-height: 40px;
+				margin: 10px;
+				background: @cccccc;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>WebView</h2>
+		<div><span>请输入要传递的值：</span><input type="text" id="input"></div>
+		<div id="btn"><span class="btn">点我</span></div>
+		
+		<script type="text/javascript">
+			var btnEle=document.getElementById("btn");
+			var inputEle=document.getElementById("input");
+
+			btnEle.addEventListener("click",function(){
+				var str=inputEle.value;
+
+				<!--这里要判断imoocLauncher对象是否存在，imoocLauncher是js接口类对象在js中作为对象使用时的名称，保持前后一致就行-->
+				if (window.imoocLauncher) {
+					imoocLauncher.setValue(str);
+				}else{
+					alert("imoocLauncher not found");
+				}
+			});
+
+            <!--Android调用js方法测试，只需加这一个方法，其余代码为测试WebView调用Java方法-->
+			var remote = function(str){
+			    inputEle.value = str;
+			}
+		</script>
+	</body>
+</html>
